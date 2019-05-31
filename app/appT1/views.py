@@ -14,8 +14,14 @@ def inventario(request):
 def proveedores(request):
     return render(request, 'appT1/proveedores.html')
 
-def tareasArealizar(request):
-    return render(request, 'appT1/tareas.html')	
+def pedidos(request):
+    return render(request, 'appT1/pedidos.html')
+
+def lista_clientes(request):
+    return render(request, 'appT1/lista_clientes.html')
+
+def cotizacion(request):
+    return render(request, 'appT1/cotizacion.html')	
 
 
 
