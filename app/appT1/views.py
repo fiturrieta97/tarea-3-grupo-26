@@ -76,7 +76,7 @@ def crearPedido(request):
 	pedido.save()
 	return render(request, 'appT1/added_pedido.html')
 
-	actualizar_pedido(request):
+def actualizar_pedido(request):
 	old_cliente = request.POST['']
 	cliente = Cliente.objects.get(nombre = old_cliente)
 	new_pagado = request.POST['']
