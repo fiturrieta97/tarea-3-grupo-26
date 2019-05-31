@@ -70,6 +70,24 @@ def crearPedido(request):
 	pedido.save()
 	return render(request, 'appT1/added_pedido.html')
 
+	actualizar_pedido(request):
+	old_cliente = request.POST['']
+	cliente = Cliente.objects.get(nombre = old_cliente)
+	new_pagado = request.POST['']
+	new_medio_pago = request.POST['']
+	new_fecha = request.POST['']
+	new_trabajador = request.POST['']
+	new_terminado =  request.POST['']
+	pedido = Pedido.objects.filter(cliente= cliente)
+	pedido.pagado = new_pagado
+	pedido.medio_pago = new_medio_pago
+	pedido.fecha_pedido = new_fecha
+	pedido.trabajador_encargado = new_trabajador
+	pedido.terminado = new_terminado
+	pedido.save()
+	return redirect('pedidos')
+
+
 def crearCliente(request):
 	nombre = request.POST['']
 	correo = request.POST['']
@@ -126,11 +144,13 @@ def form_actualizar_Insumo(request):
 	context['proveedor'] = Proveedor.objects.filter(correo = correo_provider)
 	return render(request, 'appT1/update_proveedor.html')
 
-#def actualizar_insumo(request):
-#	nombre_anterior = request.POST['nombre_anterior']
-#	insumo = Insumo.objects.filter(nombre= nombre_anterior)
-#	insumo.stock = 
-#	insumo.precio =
-#	insumo.proveedor = 
+def actualizar_insumo(request):
+	nombre_anterior = request.POST['nombre_anterior']
+	insumo = Insumo.objects.filter(nombre= nombre_anterior)
+	insumo.stock = request.POST['nuevo_stock']
+	insumo.precio = request.POST['nuevo_precio']
+	insumo.proveedor = request.POST['nuevo_proveedor']
+	insumo.save()
+	return redirect('insumos')
 
 
