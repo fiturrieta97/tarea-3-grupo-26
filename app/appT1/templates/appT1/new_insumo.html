@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contactanos</title>
+	<meta charset="utf-8">
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<style type="text/css">
+		.jumbotron {
+		 	margin: 30px;
+		}
+	</style>
+	<style>
+body {
+    background-color: white;
+}
+
+h2 {
+    color: black;
+    text-align: center;
+}
+h1 {
+    color: red;
+    text-align: center;
+}
+
+p {
+    font-family: verdana;
+    font-size: 20px;
+}
+</style>
+</head>
+
+{% include 'appT1/menu.html' %}
+
+<body>
+<header class="masthead bg-primary text-white text-center">
+    <div class="container">
+        <h1 class="text-uppercase mb-0">Creación de un nuevo insumo</h1>
+    </div>
+</header>
+
+<section id="agregar">
+    <div class="container">
+
+        <form method="POST" action="/crear_insumo"> {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputTexto">Nombre del insumo</label>
+                <input type="text" class="form-control" id="exampleText" placeholder="Ingrese texto" name="nombre">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputTexto">Dimensiones</label>
+                <input type="text" class="form-control" id="exampleText" placeholder="Ingrese texto" name="dimensiones">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputTexto">Color</label>
+                <input type="text" class="form-control" id="exampleText" placeholder="Ingrese texto" name="color">
+            </div>
+            
+            <div class="form-group">
+            <div class="row">
+                <label for="exampleNumber">Cantidad</label>
+                <input type="number" class="form-control" id="exampleNumber" placeholder="Ingrese numero" name="stock">
+            </div>
+            </div>
+
+            <div class="form-group">
+            <div class="row">
+                <label for="exampleNumber">Precio</label>
+                <input type="number" class="form-control" id="exampleNumber" placeholder="Ingrese numero" name="precio">
+            </div>
+            </div>
+
+            <div class="form-group">
+                <select name="proveedor">
+                    {% for proveedor in proveedores %}
+                        <option value="{{ proveedor.nombre }}">{{ proveedor.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            
+        
+        </div>
+        <input type="submit">
+        </form>
+    </div>
+</section>
+
+
+</body>
+</html>

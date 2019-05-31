@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Contactanos</title>
+	<title>Proveedores</title>
 	<meta charset="utf-8">
 	{% load staticfiles %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
@@ -46,14 +46,32 @@ p {
 
 	<center>
 		<div class="row">
-			<div class="col-md-12">
-				<h2>Proveedor 1:</h2>
-				<h3>Teléfono:</h3>
-				<h3>Dirección:</h3>
-				<h3>Llamar cuando:</h3>
-			</div>
-		</div>	
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Nombre contacto</th>
+                            <th scope="col">Rut</th>
+                            <th scope="col">Número</th>
+                            <th scope="col">Rut empresa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for value in proveedores %}
+                        <tr>
+                            <td>{{value.nombre}}</td>
+                            <td>{{value.nombre_contacto}}</td>
+                            <td>{{value.rut}}</td>
+                            <td>{{value.numero}}</td>
+                            <td>{{value.empresa}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 	</center>	
+
+	<a class="navbar-brand js-scroll-trigger" href="/new_proveedor">Ingresar nuevo proveedor</a>
 	
 </div>
 </body>

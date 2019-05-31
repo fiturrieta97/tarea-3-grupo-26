@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contactanos</title>
+	<meta charset="utf-8">
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<style type="text/css">
+		.jumbotron {
+		 	margin: 30px;
+		}
+	</style>
+	<style>
+body {
+    background-color: white;
+}
+
+h2 {
+    color: black;
+    text-align: center;
+}
+h1 {
+    color: red;
+    text-align: center;
+}
+
+p {
+    font-family: verdana;
+    font-size: 20px;
+}
+</style>
+</head>
+
+{% include 'appT1/menu.html' %}
+
+<body>
+<header class="masthead bg-primary text-white text-center">
+    <div class="container">
+        <h1 class="text-uppercase mb-0">Creación de un nuevo pedido</h1>
+    </div>
+</header>
+
+<section id="agregar">
+    <div class="container">
+
+        <form method="POST" action="/crear_pedido"> {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputTexto">Medio de pago</label>
+                <input type="text" class="form-control" id="exampleText" placeholder="Ingrese texto" name="medio_pago">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputTexto">Nombre del trabajador encargado</label>
+                <input type="text" class="form-control" id="exampleText" placeholder="Ingrese texto" name="trabajador_encargado">
+            </div>
+
+
+            <div class="form-group row">
+                <div class="row">
+                    <label class="col-sm-3 col-form-label" for="fecha_limite">Fecha del pedido</label>
+                    <input type="date" id="fecha_limite" name="fecha">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <select name="cliente">
+                    {% for cliente in clientes %}
+                        <option value="{{ cliente.nombre }}">{{ cliente.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+        
+        </div>
+        <input type="submit">
+        </form>
+    </div>
+</section>
+
+
+</body>
+</html>
