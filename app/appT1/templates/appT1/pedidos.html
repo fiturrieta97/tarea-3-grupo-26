@@ -38,10 +38,39 @@ p {
 	<div class="row">
 		<div class="col-md-12">
 			<div class="jumbotron">
-			<h1>Pedidos y posibilidad de ingresarlos (con cliente nuevo o existente)</h1>
+			<h1>Lista de pedidos</h1>
 			</div>
 		</div>
 	</div>
+	<center>
+		<div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Dimensiones</th>
+                            <th scope="col">Rut</th>
+                            <th scope="col">Número</th>
+                            <th scope="col">Rut empresa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for value in proveedores %}
+                        <tr>
+                            <td>{{value.nombre}}</td>
+                            <td>{{value.nombre_contacto}}</td>
+                            <td>{{value.rut}}</td>
+                            <td>{{value.numero}}</td>
+                            <td>{{value.empresa}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+	</center>	
+	<a class="navbar-brand js-scroll-trigger" href="/new_pedido">Crear pedido</a>
+	<a class="navbar-brand js-scroll-trigger" href="/actualizar_pedido">Modificar pedido</a>
+	<a class="navbar-brand js-scroll-trigger" href="/eliminar_pedido">Eliminar pedido</a>
 </div>
 </body>
 </html>

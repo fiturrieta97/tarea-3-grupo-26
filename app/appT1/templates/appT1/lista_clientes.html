@@ -42,6 +42,36 @@ p {
 			</div>
 		</div>
 	</div>
+	<center>
+		<div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Rut</th>
+                            <th scope="col">Nombre de empresa</th>
+                            <th scope="col">Número</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for value in clientes %}
+                        <tr>
+                            <td>{{value.nombre}}</td>
+                            <td>{{value.correo}}</td>
+                            <td>{{value.rut}}</td>
+                            <td>{{value.nombre_empresa}}</td>
+                            <td>{{value.numero}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+	</center>	
+	<a class="navbar-brand js-scroll-trigger" href="/new_pedido">Crear cliente</a>
+	<a class="navbar-brand js-scroll-trigger" href="/actualizar_pedido">Modificar cliente</a>
+	<a class="navbar-brand js-scroll-trigger" href="/eliminar_pedido">Eliminar cliente</a>
 </div>
+
 </body>
 </html>

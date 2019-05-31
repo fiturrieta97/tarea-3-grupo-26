@@ -8,7 +8,8 @@ class Cliente(models.Model):
 	nombre_empresa=models.CharField(max_length=45)
 	numero=models.IntegerField()
 
-class Pedido(models.Model):
+class Pedido(models.Model): 
+	id_pedido=models.IntegerField() 
 	pagado=models.BooleanField(default=False)
 	medio_pago=models.CharField(max_length=45)
 	fecha_pedido=models.DateField()
@@ -30,12 +31,6 @@ class Insumo(models.Model):
 	stock=models.IntegerField()
 	precio=models.IntegerField()
 	proveedor=models.ForeignKey(Proveedor,on_delete=models.CASCADE)
-
-class Perdidas(models.Model):
-	cantidad_perdida=models.IntegerField()
-	fecha=models.DateField()
-	insumo=models.ForeignKey(Insumo,on_delete=models.CASCADE)
-
 
 class Detalle_Pedido(models.Model):
 	pedido=models.ForeignKey(Pedido,on_delete=models.CASCADE)

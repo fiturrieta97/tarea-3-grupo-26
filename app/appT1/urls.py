@@ -16,12 +16,13 @@ urlpatterns = [
     #path('eliminar_proveedor', views.eliminar_proveedor, name='/eliminar_proveedor'),
     path('new_insumo', views.new_insumo, name='/new_insumo'),
     path('crear_insumo', views.crear_insumo, name='/crear_insumo'),
-    #path('actualizar_insumo', views.actualizar_insumo, name='/actualizar_insumo'),
+    path('actualizar_insumo', views.actualizar_insumo, name='/actualizar_insumo'),
     #path('eliminar_insumo', views.eliminar_insumo, name='/eliminar_insumo'),
     path('new_cliente', views.new_cliente, name='/new_cliente'),
     path('crear_cliente', views.crear_cliente, name='/crear_cliente'),
     #path('actualizar_cliente', views.actualizar_cliente, name='/actualizar_cliente'),
     #path('eliminar_cliente', views.eliminar_cliente, name='/eliminar_cliente'),
+    path('update_insumo', views.update_insumo, name='/update_insumo')
 
 
 

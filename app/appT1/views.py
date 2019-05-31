@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Cliente, Pedido, Proveedor, Insumo, Perdidas, Detalle_Pedido
+from .models import Cliente, Pedido, Proveedor, Insumo, Detalle_Pedido 
 # Create your views here.
 def inicio(request):
     return render(request, 'appT1/inicio.html')
@@ -8,16 +8,22 @@ def admin(request):
 	return render(request, 'appT1/admin.html')
 
 def inventario(request):
-	return render(request, 'appT1/inventario.html')
+	contexto={}
+	contexto['insumos'] = Insumo.objects.all()
+	return render(request, 'appT1/inventario.html', contexto)
 	
 def proveedores(request):
-    return render(request, 'appT1/proveedores.html')
+	contexto={}
+	contexto['proveedores'] = Proveedor.objects.all()
+	return render(request, 'appT1/proveedores.html', contexto)
 
 def pedidos(request):
     return render(request, 'appT1/pedidos.html')
 
 def lista_clientes(request):
-    return render(request, 'appT1/lista_clientes.html')
+	contexto={}
+	contexto['clientes'] = Cliente.objects.all()
+	return render(request, 'appT1/lista_clientes.html', contexto)
 
 def cotizacion(request):
     return render(request, 'appT1/cotizacion.html')	
@@ -30,10 +36,15 @@ def new_insumo(request):
     contexto['proveedores'] = Proveedor.objects.all()
     return render(request, 'appT1/new_insumo.html', contexto)
 
+def update_insumo(request):
+    contexto={}
+    contexto['proveedores'] = Proveedor.objects.all()
+    return render(request, 'appT1/update_insumo.html', contexto)
+
 def new_pedido(request):
     contexto={}
     contexto['clientes'] = Cliente.objects.all()
-    return render(request, 'appT1/new_pedido.html')
+    return render(request, 'appT1/new_pedido.html', contexto)
 
 def new_cliente(request):
 	return render(request, 'appT1/new_cliente.html')
@@ -50,20 +61,13 @@ def crear_proveedor(request):
 	return render(request, 'appT1/added_proveedor.html', context)
 
 
-def form_actualizar_proveedor(request):
-	correo_provider = request.POST['']
-	context = {}
-	context['proveedor'] = Proveedor.objects.filter(correo = correo_provider)
-	return render(request, 'appT1/update_proveedor.html')
-
 def actualizar_proveedor(request):
-	new_nombre = request.POST['']
+	old_name = request.POST['']
 	new_nombre_contacto = request.POST['']
 	new_correo = request.POST['']
 	new_numero = request.POST['']
 	new_rut_empresa = request.POST['']
-	proveedor = Proveedor.objects.filter(nombre= new_nombre)
-	proveedor.nombre = new_nombre
+	proveedor = Proveedor.objects.filter(nombre= old_name)
 	proveedor.nombre_contacto = new_nombre_contacto
 	proveedor.correo = new_correo
 	proveedor.numero = new_numero
@@ -79,6 +83,7 @@ def eliminar_proveedor(request):
 	return redirect('proveedores')
 
 def crear_pedido(request):
+	id_pedido = len(Pedido.objects.all())
 	pagado = request.POST['']
 	medio_pago = request.POST['']
 	fecha_pedido = request.POST['']
@@ -89,11 +94,11 @@ def crear_pedido(request):
 	pedido = Pedido(pagado = pagado, medio_pago=medio_pago, fecha_pedido=fecha_pedido, trabajador_encargado=trabajador_encargado, terminado= terminado, cliente=cliente)
 	pedido.save()
 	context = {'form':'¡Pedido añadido con éxito!','medio_pago':medio_pago, 'fecha_pedido':fecha_pedido, 'trabajador_encargado':trabajador_encargado, 'terminado':terminado, 'cliente':cliente}
-	return render(request, 'appT1/added_pedido.html')
+	return render(request, 'appT1/added_pedido.html', context)
 
 def actualizar_pedido(request):
-	old_cliente = request.POST['']
-	cliente = Cliente.objects.get(nombre = old_cliente)
+	id_pedido = request.POST['']
+	cliente = Cliente.objects.get(id_pedido = id_pedido)
 	new_pagado = request.POST['']
 	new_medio_pago = request.POST['']
 	new_fecha = request.POST['']
@@ -118,22 +123,16 @@ def crear_cliente(request):
 	cliente = Cliente(nombre=nombre, correo=correo, rut=rut, nombre_empresa=nombre_empresa, numero=numero)
 	cliente.save()
 	context = {'form':'¡Cliente añadido con éxito!','nombre':nombre,'rut':rut, 'nombre_empresa':nombre_empresa, 'numero':numero}
-	return render(request, 'appT1/added_cliente.html')
+	return render(request, 'appT1/added_cliente.html', context)
 
-def form_actualizar_cliente(request):
-	correo_cliente = request.POST['']
-	context = {}
-	context['cliente'] = Cliente.objects.filter(correo = correo_cliente)
-	return render(request, 'appT1/update_cliente.html')
 
 def actualizar_cliente(request):
-	new_nombre = request.POST['']
-	new_correo = request.POST['']
-	new_rut = request.POST['']
-	new_nombre_empresa = request.POST['']
-	new_numero = request.POST['']
-	cliente = Cliente.objects.filter(correo=correo_cliente)
-	cliente.nombre = new_nombre
+	old_nombre = request.POST['nombre_cliente']
+	new_correo = request.POST['correo']
+	new_rut = request.POST['rut']
+	new_nombre_empresa = request.POST['nombre_empresa']
+	new_numero = request.POST['numero']
+	cliente = Cliente.objects.filter(nombre= old_nombre)
 	cliente.correo = new_correo
 	cliente.rut = new_rut
 	cliente.nombre_empresa = new_nombre_empresa
@@ -159,16 +158,10 @@ def crear_insumo(request):
 	insumo = Insumo(nombre= nombre, dimensiones= dimensiones, color= color, stock = stock, precio = precio, proveedor = proveedor)
 	insumo.save()
 	context = {'form':'¡Insumo añadido con éxito!','nombre':nombre, 'dimensiones':dimensiones, 'correo':color, 'stock':stock, 'precio':precio, 'proveedor':proveedor}
-	return render(request, 'appT1/added_insumo.html')
-
-def form_actualizar_Insumo(request):
-	correo_provider = request.POST['']
-	context = {}
-	context['proveedor'] = Proveedor.objects.filter(correo = correo_provider)
-	return render(request, 'appT1/update_proveedor.html')
+	return render(request, 'appT1/added_insumo.html', context)
 
 def actualizar_insumo(request):
-	nombre_anterior = request.POST['nombre_anterior']
+	nombre_anterior = request.POST['nombre_insumo']
 	insumo = Insumo.objects.filter(nombre= nombre_anterior)
 	insumo.stock = request.POST['nuevo_stock']
 	insumo.precio = request.POST['nuevo_precio']
