@@ -126,11 +126,11 @@ def form_actualizar_Insumo(request):
 	context['proveedor'] = Proveedor.objects.filter(correo = correo_provider)
 	return render(request, 'appT1/update_proveedor.html')
 
-def actualizar_insumo(request):
-	nombre_anterior = request.POST['nombre_anterior']
-	insumo = Insumo.objects.filter(nombre= nombre_anterior)
-	insumo.stock = 
-	insumo.precio =
-	insumo.proveedor = 
+#def actualizar_insumo(request):
+#	nombre_anterior = request.POST['nombre_anterior']
+#	insumo = Insumo.objects.filter(nombre= nombre_anterior)
+#	insumo.stock = 
+#	insumo.precio =
+#	insumo.proveedor = 
 
 
