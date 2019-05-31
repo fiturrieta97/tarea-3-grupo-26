@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Cliente, Pedido, Proveedor, Insumo, Perdidas, Detalle_pedido
+from .models import Cliente, Pedido, Proveedor, Insumo, Perdidas, Detalle_Pedido
 # Create your views here.
 def Inicio(request):
     return render(request, 'appT1/Inicio.html')
@@ -83,8 +83,29 @@ def crearCliente(request):
 def form_actualizar_cliente(request):
 	correo_cliente = request.POST['']
 	context = {}
-	context['proveedor'] = Proveedor.objects.filter(correo = correo_provider)
-	return render(request, 'appT1/update_proveedor.html')
+	context['cliente'] = Cliente.objects.filter(correo = correo_cliente)
+	return render(request, 'appT1/update_cliente.html')
+
+def actualizar_cliente(request):
+	new_nombre = request.POST['']
+	new_correo = request.POST['']
+	new_rut = request.POST['']
+	new_nombre_empresa = request.POST['']
+	new_numero = request.POST['']
+	cliente = Cliente.objects.filter(correo=correo_cliente)
+	cliente.nombre = new_nombre
+	cliente.correo = new_correo
+	cliente.rut = new_rut
+	cliente.nombre_empresa = new_nombre_empresa
+	cliente.numero = new_numero
+	cliente.save()
+	return redirect('clientes')
+
+def eliminar_cliente(request):
+	nombre_cliente = request.POST['']
+	cliente = Cliente.objects.filter(nombre= nombre_cliente)
+	cliente.delete()
+	return redirect('clientes')
 
 
 def crearInsumo(request):
@@ -98,4 +119,18 @@ def crearInsumo(request):
 	insumo = Insumo(nombre= nombre, dimensiones= dimensiones, color= color, stock = stock, precio = precio, proveedor = proveedor)
 	insumo.save()
 	return render(request, 'appT1/added_insumo.html')
+
+def form_actualizar_Insumo(request):
+	correo_provider = request.POST['']
+	context = {}
+	context['proveedor'] = Proveedor.objects.filter(correo = correo_provider)
+	return render(request, 'appT1/update_proveedor.html')
+
+def actualizar_insumo(request):
+	nombre_anterior = request.POST['nombre_anterior']
+	insumo = Insumo.objects.filter(nombre= nombre_anterior)
+	insumo.stock = 
+	insumo.precio =
+	insumo.proveedor = 
+
 
