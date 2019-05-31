@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from .models import Cliente, Pedido, Proveedor, Insumo, Perdidas, Detalle_pedido
+from .models import Cliente, Pedido, Proveedor, Insumo, Perdidas, Detalle_Pedido
 # Create your views here.
-def Inicio(request):
-    return render(request, 'appT1/Inicio.html')
+def inicio(request):
+    return render(request, 'appT1/inicio.html')
 
-def sesion(request):
-	return render(request, 'appT1/sesion.html')
+def admin(request):
+	return render(request, 'appT1/admin.html')
 
 	
 def inventario(request):
